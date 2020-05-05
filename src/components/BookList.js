@@ -11,7 +11,7 @@ const BookList = (props) => {
         <tr>
           <th>Title</th>
           <th>Author</th>
-          <th>Published Date</th>
+          <th>Publication Date</th>
         </tr>
       </thead>
       {bookList}
