@@ -12,7 +12,7 @@ class App extends React.Component {
   }
 
   onTermSubmit(term) {
-    searchBooks(term)(this.props.dispatch);
+    this.props.searchBooks(term);
   }
 
   render() {
@@ -33,4 +33,8 @@ const mapStateToProps = (state) => {
   return { bookList: state.books };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return { searchBooks: (term) => searchBooks(term)(dispatch) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

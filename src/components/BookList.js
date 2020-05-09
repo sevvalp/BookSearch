@@ -2,8 +2,8 @@ import React from "react";
 import BookItem from "./BookItem";
 
 const BookList = (props) => {
-  const bookList = props.bookList.map((book) => {
-    return <BookItem book={book} />;
+  const bookList = props.bookList.map((book, index) => {
+    return <BookItem book={book} key={index} />;
   });
 
   return (
@@ -15,7 +15,7 @@ const BookList = (props) => {
           <th>Publication Date</th>
         </tr>
       </thead>
-      {bookList}
+      <tbody>{bookList}</tbody>
     </table>
   );
 };
