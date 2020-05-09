@@ -6,5 +6,15 @@ export const searchBooks = (term) => async (dispatch) => {
       q: term,
     },
   });
-  dispatch({ type: "SEARCH_BOOKS", payload: response.data.items });
+  if (response.data.items) {
+    dispatch({ type: "SEARCH_BOOKS", payload: response.data.items });
+  } else {
+    dispatch({ type: "SEARCH_BOOKS", payload: [] });
+  }
+  dispatch(setLoading(false));
 };
+
+export const setLoading = (loading) => ({
+  type: "SET_LOADING",
+  payload: loading,
+});

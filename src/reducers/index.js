@@ -9,6 +9,24 @@ const booksReducer = (state = [], action) => {
   }
 };
 
+const utilityReducer = (
+  state = {
+    loading: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   books: booksReducer,
+  utilities: utilityReducer,
 });

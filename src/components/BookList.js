@@ -7,16 +7,22 @@ const BookList = (props) => {
   });
 
   return (
-    <table className="ui celled table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Publication Date</th>
-        </tr>
-      </thead>
-      <tbody>{bookList}</tbody>
-    </table>
+    <React.Fragment>
+      {bookList.length ? (
+        <table className="ui celled table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Publication Date</th>
+            </tr>
+          </thead>
+          <tbody>{bookList}</tbody>
+        </table>
+      ) : (
+        <h2>No Result</h2>
+      )}
+    </React.Fragment>
   );
 };
 
