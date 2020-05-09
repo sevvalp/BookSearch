@@ -1,5 +1,4 @@
 import React from "react";
-import books from "../apis/books";
 
 const BookItem = ({ book }) => {
   return (

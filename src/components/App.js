@@ -1,51 +1,32 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 import BookList from "./BookList";
-import books from "../apis/books.js";
-import { render } from "@testing-library/react";
 import Spinner from "./Spinner";
+import { connect } from "react-redux";
+import { searchBooks } from "../actions";
 
 class App extends React.Component {
-  state = { books: [], loading: false };
-
-  onTermSubmit = async (term) => {
-    this.setState({ loading: true });
-    const response = await books.get("/v1/volumes", {
-      params: {
-        q: term,
-      },
-    });
-
-    this.setState({
-      books: response.data.items,
-      loading: false,
-    });
-  };
+  onTermSubmit(term) {
+    console.log(this.props);
+    this.props.searchBooks(term);
+  }
 
   render() {
-    if (!this.state.loading && !this.state.books.length) {
-      return (
-        <div>
-          <SearchBar onFormSubmit={this.onTermSubmit} />
-          <Spinner message="Enter a title" />
-        </div>
-      );
-    } else if (this.state.loading) {
-      return (
-        <div>
-          <SearchBar onFormSubmit={this.onTermSubmit} />
+    return (
+      <div>
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        {!this.props.bookList.length ? (
           <Spinner />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <SearchBar onFormSubmit={this.onTermSubmit} />
-          <BookList books={this.state.books} />
-        </div>
-      );
-    }
+        ) : (
+          <BookList bookList={this.props.bookList} />
+        )}
+      </div>
+    );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { bookList: state.books };
+};
+
+export default connect(mapStateToProps, { searchBooks })(App);

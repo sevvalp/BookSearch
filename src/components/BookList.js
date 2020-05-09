@@ -2,9 +2,10 @@ import React from "react";
 import BookItem from "./BookItem";
 
 const BookList = (props) => {
-  const bookList = props.books.map((book) => {
+  const bookList = props.bookList.map((book) => {
     return <BookItem book={book} />;
   });
+
   return (
     <table class="ui celled table">
       <thead>
