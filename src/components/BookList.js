@@ -7,7 +7,7 @@ const BookList = (props) => {
   });
 
   return (
-    <table class="ui celled table">
+    <table className="ui celled table">
       <thead>
         <tr>
           <th>Title</th>
