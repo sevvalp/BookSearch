@@ -6,8 +6,11 @@ import { connect } from "react-redux";
 import { searchBooks } from "../actions";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onTermSubmit = this.onTermSubmit.bind(this);
+  }
   onTermSubmit(term) {
-    console.log(this.props);
     this.props.searchBooks(term);
   }
 

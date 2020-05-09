@@ -6,6 +6,5 @@ export const searchBooks = (term) => async (dispatch) => {
       q: term,
     },
   });
-  console.log(response.data.items);
   dispatch({ type: "SEARCH_BOOKS", payload: response.data.items });
 };
