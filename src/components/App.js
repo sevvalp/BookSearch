@@ -6,9 +6,13 @@ import { connect } from "react-redux";
 import { searchBooks } from "../actions";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onTermSubmit = this.onTermSubmit.bind(this);
+  }
+
   onTermSubmit(term) {
-    console.log(this.props);
-    this.props.searchBooks(term);
+    searchBooks(term)(this.props.dispatch);
   }
 
   render() {
@@ -29,4 +33,4 @@ const mapStateToProps = (state) => {
   return { bookList: state.books };
 };
 
-export default connect(mapStateToProps, { searchBooks })(App);
+export default connect(mapStateToProps)(App);
