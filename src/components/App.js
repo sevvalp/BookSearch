@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import BookList from "./BookList";
 import Spinner from "./Spinner";
 import { connect } from "react-redux";
-import { searchBooks } from "../actions";
+import { searchBooks, setLoading } from "../actions";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,25 +11,24 @@ class App extends React.Component {
     this.onTermSubmit = this.onTermSubmit.bind(this);
   }
   onTermSubmit(term) {
+    this.props.setLoading(true);
     this.props.searchBooks(term);
   }
 
   render() {
+    const { loading, bookList } = this.props;
     return (
       <div>
         <SearchBar onFormSubmit={this.onTermSubmit} />
-        {!this.props.bookList.length ? (
-          <Spinner />
-        ) : (
-          <BookList bookList={this.props.bookList} />
-        )}
+        {loading === true && <Spinner />}
+        {loading === false && <BookList bookList={bookList} />}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { bookList: state.books };
+  return { bookList: state.books, loading: state.utilities.loading };
 };
 
-export default connect(mapStateToProps, { searchBooks })(App);
+export default connect(mapStateToProps, { searchBooks, setLoading })(App);
